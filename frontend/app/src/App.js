@@ -14,17 +14,15 @@ function App() {
 	const [desc, setDesc] = useState('');
 
 	useEffect(() => {
-		axios.get('http://localhost:8001/api/todo/')
+		axios.get('http://localhost:8000/api/todo/')
 			.then(res => {
 				setTodoList(res.data)
-			});
+			})
 	});
 
 	const handleAddTodo = () => {
-		axios.post('https://localhost:8001/api/todo/', { 'title': title, 'description': desc })
-			.then(res => 
-				console.log(res)
-			);
+		axios.post('http://localhost:8000/api/todo/', { 'title': title, 'description': desc })
+			.then(res => console.log(res))
 	};
 
 	return (
