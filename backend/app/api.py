@@ -3,8 +3,9 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from .models import Todo
-from .database import (
+# Relative Imports
+from app.models import Todo
+from app.database import (
     create_todo,
     fetch_all_todos,
     update_todo,

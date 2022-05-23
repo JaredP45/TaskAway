@@ -3,7 +3,7 @@ import axios from 'axios';
 import React from 'react';
 
 export default function Todo(props) {
-    const deleteTodoHandler = (title) => {
+    const handleDeleteTodo = (title) => {
         axios.delete(`http://localhost:8000/api/todo/${title}`)
             .then(res => console.log(res))
     };
@@ -19,7 +19,7 @@ export default function Todo(props) {
                     { props.todo.description }
 
                     <button 
-                        onClick={() => deleteTodoHandler(props.todo.title)}
+                        onClick={() => handleDeleteTodo(props.todo.title)}
                         style={{ color: 'red'}}
                     >
                         Delete
