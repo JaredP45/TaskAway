@@ -2,9 +2,9 @@ import os
 import motor.motor_asyncio
 from .models import Todo
 
-client = motor.motor_asyncio.AsyncIOMotorClient(os.environ['MONGODB_URL'])
+client = motor.motor_asyncio.AsyncIOMotorClient()
 
-db = client.Cluster1
+db = client.TaskAwayCluster
 collection = db.todo
 
 
