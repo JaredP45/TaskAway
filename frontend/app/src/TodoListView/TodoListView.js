@@ -1,15 +1,37 @@
 // Module Imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 // Relative Imports
 import Todo from '../Todo/Todo';
+import {Context} from '../TodoMain/TodoMain';
 
-export default function TodoListView(props) {
+// Style Imports
+import '../App.css';
+
+
+const TodoListView = () => {
+	const [state, dispatch] = useContext(Context);
+    
+    let tasks = <p>Loading...</p>;
+
+    if (state.error) {
+        let tasks = <p>Something went wrong: <span>{ state.error }</span></p>;
+    };
+
+    if (!state.error && state.todoList) {
+        tasks = state.todoList.map(task => {
+            return <Todo todo={task} />;
+        });
+    };
+
     return (
-        <div>
+        <div className="App">
+		    <h1>TaskAway</h1>
             <ul>
-                { props.todoList.map(todo => <Todo todo={todo} />)}
+                { tasks }
             </ul>
         </div>
     );
-}
+};
+
+export default TodoListView;
