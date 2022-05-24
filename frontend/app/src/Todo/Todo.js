@@ -7,8 +7,8 @@ export default function Todo(props) {
 	const [desc, setDesc] = useState('');
     const [isEditable, setIsEditable] = useState(false);
 
-    const handleDeleteTodo = (title) => {
-        axios.delete(`http://localhost:8000/api/todo/${title}`)
+    const handleDeleteTodo = () => {
+        axios.delete(`http://localhost:8000/api/todo/${props.todo.title}`)
             .then(res => console.log(res))
     };
 
@@ -17,8 +17,11 @@ export default function Todo(props) {
     };
 
     const handleUpdateTodo = () => {
-        axios.put(`http://localhost:8000/api/todo/${title}`, {'title': title, 'description': desc})
-            .then(res => console.log(res))
+        axios.put(`http://localhost:8000/api/todo/${props.todo.title}`, { 'title': title, 'description': desc })
+            .then(res => {
+                console.log(res.data);
+            });
+        setIsEditable(!isEditable);
     };
 
     return (
@@ -37,17 +40,19 @@ export default function Todo(props) {
                             <div>
                                 <input 
                                     onChange={(event) => setTitle(event.target.value)}
-                                    placeholder='Title'
+                                    value={title}
+                                    placeholder={ props.todo.title }
                                 />
                                 <input 
-                                    onChange={event => setDesc(event.target.value)} 
-                                    placeholder='Description'
+                                    onChange={event => setDesc(event.target.value)}
+                                    value={desc}
+                                    placeholder={ props.todo.description }
                                 />
                                 <button 
-                                    onClick={() => handleUpdateTodo(props.todo.title)}
+                                    onClick={() => handleUpdateTodo()}
                                     style={{ color: 'blue'}}
                                 >
-                                    Edit
+                                    Update
                                 </button>
                             </div>
                     }
@@ -60,7 +65,7 @@ export default function Todo(props) {
                     </button>
 
                     <button 
-                        onClick={() => handleDeleteTodo(props.todo.title)}
+                        onClick={() => handleDeleteTodo()}
                         style={{ color: 'red'}}
                     >
                         Delete
