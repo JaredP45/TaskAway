@@ -1,23 +1,25 @@
 // Module Imports
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+// Relative imports
+import {Context} from '../TodoMain/TodoMain';
 
 export default function Todo(props) {
-	const [title, setTitle] = useState('');
-	const [desc, setDesc] = useState('');
+	const [state, dispatch] = useContext(Context);
     const [isEditable, setIsEditable] = useState(false);
 
     const handleDeleteTodo = () => {
         axios.delete(`http://localhost:8000/api/todo/${props.todo.title}`)
-            .then(res => console.log(res))
+            .then(response => console.log(response))
     };
 
-    const handleEditTodo = () => {
+    const handleIsEditable = () => {
         setIsEditable(!isEditable);
     };
 
     const handleUpdateTodo = () => {
-        axios.put(`http://localhost:8000/api/todo/${props.todo.title}`, { 'title': title, 'description': desc })
+        axios.put(`http://localhost:8000/api/todo/${props.todo.title}`, { 'title': state.title, 'description': state.desc })
             .then(res => {
                 console.log(res.data);
             });
@@ -39,14 +41,14 @@ export default function Todo(props) {
                         :
                             <div>
                                 <input 
-                                    onChange={(event) => setTitle(event.target.value)}
-                                    value={title}
-                                    placeholder={ props.todo.title }
+                                    onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
+                                    value={state.title}
+                                    placeholder={props.todo.title}
                                 />
                                 <input 
-                                    onChange={event => setDesc(event.target.value)}
-                                    value={desc}
-                                    placeholder={ props.todo.description }
+                                    onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
+                                    value={state.desc}
+                                    placeholder={props.todo.description}
                                 />
                                 <button 
                                     onClick={() => handleUpdateTodo()}
@@ -58,7 +60,7 @@ export default function Todo(props) {
                     }
 
                     <button 
-                        onClick={handleEditTodo}
+                        onClick={handleIsEditable}
                         style={{ color: 'green'}}
                     >
                         Edit

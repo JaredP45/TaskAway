@@ -20,7 +20,15 @@ const TodoAdd = () => {
 
 	const handleAddTodo = () => {
 		axios.post('http://localhost:8000/api/todo/', { 'title': state.title, 'description': state.desc })
-			.then(response => console.log(response))
+			.then(response => console.log(response));
+        dispatch({ 
+            type: 'SET_TITLE', 
+            payload: '',        
+        });
+        dispatch({ 
+            type: 'SET_DESCRIPTION', 
+            payload: '',        
+        });
 	};
 
 	return (
@@ -28,10 +36,12 @@ const TodoAdd = () => {
 			<p>Add Todo</p>
 			<input 
 				onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
-				placeholder='Title'
+				value={state.title}
+                placeholder='Title'
 			/>
 			<input 
-				onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })} 
+				onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
+                value={state.desc}
 				placeholder='Description'
 			/>
 			<button onClick={handleAddTodo}>

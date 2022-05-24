@@ -23,7 +23,7 @@ const TodoListView = () => {
             return <Todo todo={task} />;
         });
     };
-
+    
     return (
         <div className="App">
 		    <h1>TaskAway</h1>
