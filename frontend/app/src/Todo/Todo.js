@@ -19,11 +19,20 @@ export default function Todo(props) {
     };
 
     const handleUpdateTodo = () => {
-        axios.put(`http://localhost:8000/api/todo/${props.todo.title}`, { 'title': state.title, 'description': state.desc })
+        axios.put(`http://localhost:8000/api/todo/${state.title}?desc=${state.desc}`, { 'title': state.title, 'description': state.desc })
             .then(res => {
                 console.log(res.data);
             });
         setIsEditable(!isEditable);
+
+        dispatch({ 
+            type: 'SET_TITLE', 
+            payload: '',        
+        });
+        dispatch({ 
+            type: 'SET_DESCRIPTION', 
+            payload: '',        
+        });
     };
 
     return (
