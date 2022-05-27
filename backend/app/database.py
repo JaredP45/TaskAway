@@ -16,23 +16,24 @@ async def fetch_all_todos():
     return todos
 
 
+async def fetch_one_todo(uid):
+    document = await collection.find_one({"uid": uid}, {"_id": 0})
+    return document
+
+
 async def create_todo(todo):
-    document = todo
-    result = await collection.insert_one(document)
-    return document
+    document = todo.dict()
+    await collection.insert_one(document)
+    result = await fetch_one_todo(todo.uid)
+    return result
 
 
-async def update_todo(title, desc):
-    await collection.update_one({"title": title}, {"$set": {"description": desc}})
-    document = await collection.find_one({"title": title})
-    return document
+async def update_todo(uid, title, desc):
+    await collection.update_one({"uid": uid}, {"$set": {"title": title, "description": desc}})
+    result = await fetch_one_todo(uid)
+    return result
 
 
-async def fetch_one_todo(title):
-    document = await collection.find_one({"title": title})
-    return document
-
-
-async def remove_todo(title):
-    await collection.delete_one({"title": title})
+async def remove_todo(uid):
+    await collection.delete_one({"uid": uid})
     return True

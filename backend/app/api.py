@@ -34,9 +34,9 @@ async def get_todo():
     return response
 
 
-@app.get("/api/todo/{title}/", response_model=Todo)
-async def get_todo_by_title(title):
-    response = await fetch_one_todo(title)
+@app.get("/api/todo/{uid}/", response_model=Todo)
+async def get_todo_by_id(uid):
+    response = await fetch_one_todo(uid)
     if response:
         return response
     raise HTTPException(404, f"There is no task with the title {title}.")
@@ -44,23 +44,23 @@ async def get_todo_by_title(title):
 
 @app.post("/api/todo/", response_model=Todo)
 async def post_todo(todo: Todo):
-    response = await create_todo(todo.dict())
+    response = await create_todo(todo)
     if response:
         return response
     raise HTTPException(400, "Something went wrong.")
 
 
-@app.put("/api/todo/{title}/", response_model=Todo)
+@app.put("/api/todo/{uid}/", response_model=Todo)
 async def put_todo(title: str, desc: str):
-    response = await update_todo(title, desc)
+    response = await update_todo(uid, title, desc)
     if response:
         return response
-    raise HTTPException(404, f"There is no taks with the title {title}.")
+    raise HTTPException(404, f"There is no task with ID {uid}.")
 
 
-@app.delete("/api/todo/{title}/")
-async def delete_todo(title):
-    response = await remove_todo(title)
+@app.delete("/api/todo/{uid}/")
+async def delete_todo(uid):
+    response = await remove_todo(uid)
     if response:
         return "Successfully deleted todo."
-    raise HTTPException(404, f"There is no task with the tite {title}.")
+    raise HTTPException(404, f"There is no task with ID {uid}.")
