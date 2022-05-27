@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Relative Imports
-import TodoMain from './TaskAway/TodoMain/TodoMain';
+import TodoMain from './TaskAway/TodoMain';
 import TodoListView from './TaskAway/TodoListView/TodoListView';
 import TodoAdd from './TaskAway/TodoAdd/TodoAdd';
 

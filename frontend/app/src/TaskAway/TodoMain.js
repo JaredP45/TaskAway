@@ -1,13 +1,6 @@
 import React, {createContext, useReducer} from "react";
-import Reducer from '../Reducer/reducer';
-
-const initialState = {
-    todoList: [{}],
-	title: '',
-	desc: '',
-    error: null,
-};
-
+import Reducer from './GlobalContext/reducer';
+import { initialState } from './GlobalContext/initialState';
 
 const TodoMain = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, initialState);

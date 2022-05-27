@@ -1,9 +1,8 @@
 // Module Imports
-import axios from 'axios';
-import React, {useEffect, useContext} from 'react';
+import React, { useEffect, useContext } from 'react';
 
 // Relative Imports
-import {Context} from '../TodoMain/TodoMain';
+import { Context } from '../TodoMain';
 import TaskAwayAPI from '../api/api';
 
 // Style Imports
@@ -50,6 +49,5 @@ const TodoAdd = () => {
 		</div>
 	);
 }
-
 
 export default TodoAdd;

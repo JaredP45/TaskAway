@@ -23,8 +23,6 @@ class TaskAwayAPI {
         const response = await axios.delete(`${TASKAWAY_API_BASE_URL}${title}`);
         console.log(response);
     }
-
-
 };
 
 export default new TaskAwayAPI();

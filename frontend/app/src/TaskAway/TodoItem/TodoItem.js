@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 
 // Relative imports
-import {Context} from '../TodoMain/TodoMain';
+import { Context } from '../TodoMain';
 import TaskAwayAPI from '../api/api';
 
 export default function Todo(props) {
@@ -62,6 +62,7 @@ export default function Todo(props) {
                                     Update
                                 </button>
                             </div>
+                        // End-of-Ternary
                     }
 
                     <button 
