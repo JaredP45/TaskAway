@@ -1,21 +1,21 @@
 // Module Imports
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
 // Relative Imports
 import Todo from '../Todo/Todo';
 import {Context} from '../TodoMain/TodoMain';
 
 // Style Imports
-import '../App.css';
+import '../../App.css';
 
 
 const TodoListView = () => {
-	const [state, dispatch] = useContext(Context);
+	const [state, ] = useContext(Context);
     
     let tasks = <p>Loading...</p>;
 
     if (state.error) {
-        let tasks = <p>Something went wrong: <span>{ state.error }</span></p>;
+        tasks = <p>Something went wrong: <span>{ state.error }</span></p>;
     };
 
     if (!state.error && state.todoList) {

@@ -1,17 +1,16 @@
 // Module Imports
-import axios from 'axios';
 import React, { useState, useContext } from 'react';
 
 // Relative imports
 import {Context} from '../TodoMain/TodoMain';
+import TaskAwayAPI from '../api/api';
 
 export default function Todo(props) {
 	const [state, dispatch] = useContext(Context);
     const [isEditable, setIsEditable] = useState(false);
 
     const handleDeleteTodo = () => {
-        axios.delete(`http://localhost:8000/api/todo/${props.todo.title}`)
-            .then(response => console.log(response))
+        TaskAwayAPI.deleteTask(props.todo.title);
     };
 
     const handleIsEditable = () => {
@@ -19,11 +18,8 @@ export default function Todo(props) {
     };
 
     const handleUpdateTodo = () => {
-        axios.put(`http://localhost:8000/api/todo/${state.title}?desc=${state.desc}`, { 'title': state.title, 'description': state.desc })
-            .then(res => {
-                console.log(res.data);
-            });
-        setIsEditable(!isEditable);
+        TaskAwayAPI.updateTask(state.title, state.desc);
+        handleIsEditable();
 
         dispatch({ 
             type: 'SET_TITLE', 

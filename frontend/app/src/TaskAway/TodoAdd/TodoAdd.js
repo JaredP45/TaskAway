@@ -4,23 +4,23 @@ import React, {useEffect, useContext} from 'react';
 
 // Relative Imports
 import {Context} from '../TodoMain/TodoMain';
+import TaskAwayAPI from '../api/api';
 
 // Style Imports
-import '../App.css';
+import '../../App.css';
 
 const TodoAdd = () => {
 	const [state, dispatch] = useContext(Context);
 
 	useEffect(() => {
-		axios.get('http://localhost:8000/api/todo/')
-			.then(response => {
-                dispatch({ type: 'SET_TODOLIST', payload: response.data });
-			})
-	});
+		TaskAwayAPI.retrieveTask().then(response => {
+			dispatch({ type: 'SET_TODOLIST', payload: response.data });
+		});
+	}, [dispatch, state.todoList]);
 
 	const handleAddTodo = () => {
-		axios.post('http://localhost:8000/api/todo/', { 'title': state.title, 'description': state.desc })
-			.then(response => console.log(response));
+		TaskAwayAPI.createTask(state.title, state.desc);
+
         dispatch({ 
             type: 'SET_TITLE', 
             payload: '',        
