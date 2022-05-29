@@ -4,9 +4,6 @@ import motor.motor_asyncio
 from pydantic import BaseSettings
 import os
 
-# Relative Imports
-
-
 
 class CommonSettings(BaseSettings):
     APP_NAME: str = "TaskAway"

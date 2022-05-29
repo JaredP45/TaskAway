@@ -10,7 +10,7 @@ class TaskModel(BaseModel):
         uid - unique ID
         title - title of task
         description - task description
-        date_created - day task was created on
+        created_on - day task was created on
         completed - if task was completed
     '''
     

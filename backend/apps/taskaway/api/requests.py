@@ -6,10 +6,12 @@ from fastapi.encoders import jsonable_encoder
 # Relative Imports
 from apps.taskaway.models.models import TaskModel 
 
-client = motor.motor_asyncio.AsyncIOMotorClient()
 
+# Connect to database for requesting actions
+client = motor.motor_asyncio.AsyncIOMotorClient()
 db = client.TaskAwayCluster
 collection = db.taskaway
+
 
 # Create Request
 async def create_task(task):
@@ -19,7 +21,7 @@ async def create_task(task):
     return created_task
 
 
-# Fetch Requests
+# Fetch Request(s)
 async def fetch_all_tasks():
     tasks = []
     cursor = collection.find({}).to_list(length=100)
