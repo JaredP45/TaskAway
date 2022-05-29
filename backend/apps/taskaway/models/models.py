@@ -18,6 +18,8 @@ class TaskModel(BaseModel):
     title: str = Field(...)
     description: str = Field(...)
     created_on: datetime = Field(...)
+    expires_on: datetime = Field(...)
+    completed_on: datetime = Field(...)
     completed: bool = False
 
     class Config:
@@ -27,7 +29,9 @@ class TaskModel(BaseModel):
                 "title": "Task Title",
                 "description": "The context or instructions for the task.",
                 "created_on": "2022-05-28 00:00:00.000000",
-                "completed": True
+                "expires_on": "2022-05-28 00:00:00.000000",
+                "completed_on": "2022-05-28 00:00:00.000000",
+                "completed": True,
             }
         }
 
@@ -40,7 +44,9 @@ class UpdateTaskModel(BaseModel):
     title: Optional[str]
     description: Optional[str]
     created_on: Optional[datetime]
-    completed: Optional[bool]
+    expires_on: Optional[datetime]
+    completed_on: Optional[datetime]
+    completed: Optional[bool] 
 
     class Config:
         schema_extra = {
@@ -48,6 +54,8 @@ class UpdateTaskModel(BaseModel):
                 "title": "Task Title",
                 "description": "The context or instructions for the task.",
                 "created_on": "2022-05-28 00:00:00.000000",
-                "completed": True
+                "expires_on": "2022-05-28 00:00:00.000000",
+                "completed_on": "2022-05-28 00:00:00.000000",
+                "completed": True,
             }
         }
