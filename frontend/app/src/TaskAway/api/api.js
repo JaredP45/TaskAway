@@ -4,7 +4,7 @@ import axios from 'axios';
 const TASKAWAY_API_BASE_URL = "http://localhost:8000/api/todo/";
 
 class TaskAwayAPI {
-    async createTask(title, desc) {
+    async createTask(uid, title, desc) {
         const response = await axios.post(`${TASKAWAY_API_BASE_URL}`, { 'title': title, 'description': desc })
         console.log(response);
     }
