@@ -1,6 +1,6 @@
 # Module Imports
 from pydantic import BaseModel, Field
-from datetime import date as date_type
+from datetime import datetime
 import uuid
 from typing import Optional
 
@@ -17,7 +17,7 @@ class TaskModel(BaseModel):
     uid: str = Field(default_factory=uuid.uuid4, alias="_id")
     title: str = Field(...)
     description: str = Field(...)
-    created_on: date_type = Field(..., alias="date")
+    created_on: datetime = Field(...)
     completed: bool = False
 
     class Config:
@@ -26,7 +26,7 @@ class TaskModel(BaseModel):
             "example": {
                 "title": "Task Title",
                 "description": "The context or instructions for the task.",
-                "created_on": "2022-05-28",
+                "created_on": "2022-05-28 00:00:00.000000",
                 "completed": True
             }
         }
@@ -39,7 +39,7 @@ class UpdateTaskModel(BaseModel):
 
     title: Optional[str]
     description: Optional[str]
-    created_on: Optional[date_type]
+    created_on: Optional[datetime]
     completed: Optional[bool]
 
     class Config:
@@ -47,7 +47,7 @@ class UpdateTaskModel(BaseModel):
             "example": {
                 "title": "Task Title",
                 "description": "The context or instructions for the task.",
-                "created_on": "2022-05-28",
+                "created_on": "2022-05-28 00:00:00.000000",
                 "completed": True
             }
         }
