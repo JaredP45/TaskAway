@@ -9,7 +9,7 @@ from apps.taskaway.models import TaskModel
 client = motor.motor_asyncio.AsyncIOMotorClient()
 
 db = client.TaskAwayCluster
-collection = db.task
+collection = db.taskaway
 
 # Create Request
 async def create_task(task):
