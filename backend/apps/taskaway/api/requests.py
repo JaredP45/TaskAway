@@ -4,7 +4,7 @@ import motor.motor_asyncio
 from fastapi.encoders import jsonable_encoder
 
 # Relative Imports
-from apps.taskaway.models import TaskModel 
+from apps.taskaway.models.models import TaskModel 
 
 client = motor.motor_asyncio.AsyncIOMotorClient()
 
@@ -19,12 +19,12 @@ async def create_task(task):
     return created_task
 
 
-# Fetch Request(s)
+# Fetch Requests
 async def fetch_all_tasks():
     tasks = []
     cursor = collection.find({}).to_list(length=100)
     for document in await cursor:
-        tasks.append(TaskModel(**document))
+        tasks.append(document)
     return tasks
 
 

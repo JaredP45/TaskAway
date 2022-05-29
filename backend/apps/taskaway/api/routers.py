@@ -5,7 +5,7 @@ from fastapi.responses import Response, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 # Relative Imports
-from apps.taskaway.models import TaskModel, UpdateTaskModel
+from apps.taskaway.models.models import TaskModel, UpdateTaskModel
 from apps.taskaway.api.requests import (
     create_task,
     fetch_all_tasks,
