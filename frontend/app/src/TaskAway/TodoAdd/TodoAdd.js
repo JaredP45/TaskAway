@@ -12,22 +12,37 @@ const TodoAdd = () => {
 	const [state, dispatch] = useContext(Context);
 
 	useEffect(() => {
-		TaskAwayAPI.retrieveTask().then(response => {
-			dispatch({ type: 'SET_TODOLIST', payload: response.data });
-		});
+		const fetchAllTasks = () => {
+			TaskAwayAPI.retrieveTask().then(response => {
+				dispatch({ type: 'SET_TODOLIST', payload: response.data });
+			});
+		}	
+
+		const interval = setInterval(fetchAllTasks, 5000)
+
+		return () => {
+			clearInterval(interval)
+		}
+
 	}, [dispatch, state.todoList]);
 
 	const handleAddTodo = () => {
-		TaskAwayAPI.createTask(state.title, state.desc);
+		TaskAwayAPI.createTask(state.title, state.desc, state.isComplete);
 
-        dispatch({ 
-            type: 'SET_TITLE', 
-            payload: '',        
-        });
-        dispatch({ 
-            type: 'SET_DESCRIPTION', 
-            payload: '',        
-        });
+        dispatch(
+			{ 
+				type: 'SET_TITLE', 
+				payload: '',        
+			},
+			{ 
+				type: 'SET_DESCRIPTION', 
+				payload: '',        
+			},
+			{ 
+				type: 'SET_IS_COMPLETE', 
+				payload: !state.isComplete,        
+			}
+		);
 	};
 
 	return (
@@ -43,6 +58,14 @@ const TodoAdd = () => {
                 value={state.desc}
 				placeholder='Description'
 			/>
+			<label>
+				Completed
+				<input 
+					onChange={event => dispatch({ type: 'SET_IS_COMPLETE', payload: event.target.value })}
+					value={state.isComplete}
+					type={'checkbox'}
+				/>
+			</label>
 			<button onClick={handleAddTodo}>
 				Add
 			</button>

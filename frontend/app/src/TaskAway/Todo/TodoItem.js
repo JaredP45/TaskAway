@@ -10,7 +10,7 @@ export default function Todo(props) {
     const [isEditable, setIsEditable] = useState(false);
 
     const handleDeleteTodo = () => {
-        TaskAwayAPI.deleteTask(props.todo.title);
+        TaskAwayAPI.deleteTask(props.todo._id);
     };
 
     const handleIsEditable = () => {
@@ -18,17 +18,23 @@ export default function Todo(props) {
     };
 
     const handleUpdateTodo = () => {
-        TaskAwayAPI.updateTask(state.title, state.desc);
+        TaskAwayAPI.updateTask(props.todo._id, state.title, state.desc, state.isComplete);
         handleIsEditable();
 
-        dispatch({ 
-            type: 'SET_TITLE', 
-            payload: '',        
-        });
-        dispatch({ 
-            type: 'SET_DESCRIPTION', 
-            payload: '',        
-        });
+        dispatch(
+			{ 
+				type: 'SET_TITLE', 
+				payload: '',        
+			},
+			{ 
+				type: 'SET_DESCRIPTION', 
+				payload: '',        
+			},
+			{ 
+				type: 'SET_IS_COMPLETE', 
+				payload: !state.isComplete,        
+			}
+		);
     };
 
     return (
@@ -42,6 +48,7 @@ export default function Todo(props) {
                                     { props.todo.title }
                                 </span>
                                 { props.todo.description }
+                                { props.todo.completed ? "completed" : "not completed" }
                             </div>
                         :
                             <div>
@@ -55,6 +62,14 @@ export default function Todo(props) {
                                     value={state.desc}
                                     placeholder={props.todo.description}
                                 />
+                                <label>
+                                    Completed
+                                    <input 
+                                        onChange={event => dispatch({ type: 'SET_IS_COMPLETE', payload: event.target.value })}
+                                        value={props.todo.completed}
+                                        type={'checkbox'}
+                                    />
+                                </label>
                                 <button 
                                     onClick={() => handleUpdateTodo()}
                                     style={{ color: 'blue'}}

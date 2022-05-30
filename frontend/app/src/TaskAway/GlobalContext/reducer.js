@@ -15,6 +15,11 @@ const Reducer = (state, action) => {
                 ...state,
                 desc: action.payload
             };
+        case 'SET_IS_COMPLETE':
+            return {
+                ...state,
+                desc: action.payload
+            };
         case 'GET_ERROR':
             return {
                 ...state,
