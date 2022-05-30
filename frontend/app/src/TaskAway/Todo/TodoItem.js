@@ -17,6 +17,10 @@ export default function Todo(props) {
         setIsEditable(!isEditable);
     };
 
+    const handleIsComplete = () => {
+		dispatch({ type: 'SET_IS_COMPLETE', payload: !state.isComplete })
+	};
+
     const handleUpdateTodo = () => {
         TaskAwayAPI.updateTask(props.todo._id, state.title, state.desc, state.isComplete);
         handleIsEditable();
@@ -65,8 +69,8 @@ export default function Todo(props) {
                                 <label>
                                     Completed
                                     <input 
-                                        onChange={event => dispatch({ type: 'SET_IS_COMPLETE', payload: event.target.value })}
-                                        value={props.todo.completed}
+                                        onClick={handleIsComplete}
+                                        value={state.isComplete}
                                         type={'checkbox'}
                                     />
                                 </label>
