@@ -5,11 +5,12 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 
 # Relative Imports
-from apps.routes.api import router as task_router
+from apps.routes.api import router
 from config import settings
 
-app = FastAPI()
 
+app = FastAPI()
+app.include_router(router)
 
 @app.on_event("startup")
 async def startup_db_client():
@@ -21,12 +22,11 @@ async def startup_db_client():
 async def shutdown_db_client():
     app.mongodb_client.close()
 
-
 origins = [
-    "http://localhost/",
-    "http://localhost:8000/",
-    "http://localhost:8001/",
-    "http://localhost:3000/",
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:8001/tasks",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
@@ -38,7 +38,6 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
-app.include_router(task_router)
 
 if __name__ == '__main__':
     uvicorn.run('main:app', host=settings.HOST, port=settings.PORT, reload=settings.DEBUG_MODE)

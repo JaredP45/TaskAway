@@ -1,7 +1,7 @@
 // Module Imports
 import axios from 'axios';
 
-const TASKAWAY_API_BASE_URL = "http://localhost:8000/api/todo/";
+const TASKAWAY_API_BASE_URL = "http://localhost:8001/tasks/";
 
 class TaskAwayAPI {
     async createTask(uid, title, desc) {

@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 
 // Relative Imports
-import TodoItem from '../TodoItem/TodoItem';
+import TodoItem from '../Todo/TodoItem';
 import { Context } from '../TodoMain';
 
 // Style Imports
