@@ -18,7 +18,7 @@ const TodoAdd = () => {
 			});
 		}	
 
-		const interval = setInterval(fetchAllTasks, 5000)
+		const interval = setInterval(fetchAllTasks, 1000)
 
 		return () => {
 			clearInterval(interval)
@@ -32,17 +32,21 @@ const TodoAdd = () => {
         dispatch(
 			{ 
 				type: 'SET_TITLE', 
-				payload: '',        
+				payload: '',
 			},
 			{ 
 				type: 'SET_DESCRIPTION', 
-				payload: '',        
+				payload: '',
 			},
 			{ 
 				type: 'SET_IS_COMPLETE', 
-				payload: !state.isComplete,        
+				payload: false,
 			}
 		);
+	};
+
+	const handleIsComplete = () => {
+		dispatch({ type: 'SET_IS_COMPLETE', payload: !state.isComplete })
 	};
 
 	return (
@@ -60,8 +64,8 @@ const TodoAdd = () => {
 			/>
 			<label>
 				Completed
-				<input 
-					onChange={event => dispatch({ type: 'SET_IS_COMPLETE', payload: event.target.value })}
+				<input
+					onClick={handleIsComplete}
 					value={state.isComplete}
 					type={'checkbox'}
 				/>

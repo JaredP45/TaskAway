@@ -18,7 +18,7 @@ const Reducer = (state, action) => {
         case 'SET_IS_COMPLETE':
             return {
                 ...state,
-                desc: action.payload
+                isComplete: action.payload
             };
         case 'GET_ERROR':
             return {

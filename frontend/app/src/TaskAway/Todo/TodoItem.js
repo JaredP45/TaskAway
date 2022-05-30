@@ -32,7 +32,7 @@ export default function Todo(props) {
 			},
 			{ 
 				type: 'SET_IS_COMPLETE', 
-				payload: !state.isComplete,        
+				payload: false,        
 			}
 		);
     };
