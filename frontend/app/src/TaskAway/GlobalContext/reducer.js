@@ -20,6 +20,11 @@ const Reducer = (state, action) => {
                 ...state,
                 isComplete: action.payload
             };
+        case 'SET_IS_EDITABLE':
+            return {
+                ...state,
+                isEditable: action.payload
+            };
         case 'SET_IS_LOADING':
             return {
                 ...state,

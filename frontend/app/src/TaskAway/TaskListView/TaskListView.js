@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 
 // Relative Imports
-import TaskItem from '../Task/TaskItem';
+import TaskItem from '../TaskItem/TaskItem';
 import AddTask from '../TaskMethods/AddTask';
 import GetTasks from '../TaskMethods/GetTasks';
 import { Context } from '../TaskContextMain';
@@ -15,7 +15,7 @@ const TodoListView = () => {
 	const [state, ] = useContext(Context);
 
     GetTasks();
-    let tasks = '';
+    let tasks = [{}];
 
     if (state.isLoading) {
         tasks = <p>Loading...</p>;
