@@ -26,8 +26,8 @@ const TodoListView = () => {
     };
 
     if (!state.isLoading && !state.error && state.taskList) {
-        tasks = state.taskList.map(task => {
-            return <TaskItem task={task} />;
+        tasks = state.taskList.map((task, index )=> {
+            return <TaskItem task={task} key={index} />;
         });
     };
     
