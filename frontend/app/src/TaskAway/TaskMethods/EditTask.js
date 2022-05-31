@@ -19,7 +19,7 @@ export default function EditTasks(props) {
 	};
 
     const handleUpdateTodo = () => {
-        TaskAwayAPI.updateTask(props._id, state.title, state.desc, state.isComplete);
+        TaskAwayAPI.updateTask(props.task.task._id, state.title, state.desc, state.isComplete);
         handleIsEditable();
 
         dispatch(
@@ -39,58 +39,54 @@ export default function EditTasks(props) {
     };
 
     return (
-        <div className="EditTask" style={{ display: 'flex', justifyContent: 'center'}}>
-            <div style={{ width: '500px' }}>
-                <p>
-                    { (!isEditable)
-                        ?
-                            <div>
-                                <span style={{ fontWeight: 'bold' }}>
-                                    { props.task.title }
-                                </span>
-                                { props.task.description }
-                                { props.task.completed ? "completed" : "not completed" }
-                            </div>
-                        :
-                            <div>
-                                <input 
-                                    onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
-                                    value={state.title}
-                                    placeholder={props.task.title}
-                                />
-                                <input 
-                                    onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
-                                    value={state.desc}
-                                    placeholder={props.task.description}
-                                />
-                                <label>
-                                    Completed
-                                    <input 
-                                        onClick={handleIsComplete}
-                                        value={props.task.completed}
-                                        type={'checkbox'}
-                                    />
-                                </label>
-                                <button 
-                                    onClick={() => handleUpdateTodo()}
-                                    style={{ color: 'blue'}}
-                                >
-                                    Update
-                                </button>
-                            </div>
-                        // End-of-Ternary
-                    }
+        <p>
+            { (!isEditable)
+                ?
+                    <div>
+                        <span style={{ fontWeight: 'bold' }}>
+                            { props.task.task.title }
+                        </span>
+                        { props.task.task.description }
+                        { props.task.task.completed ? "completed" : "not completed" }
+                    </div>
+                :
+                    <div>
+                        <input 
+                            onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
+                            value={state.title}
+                            placeholder={props.task.task.title}
+                        />
+                        <input 
+                            onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
+                            value={state.desc}
+                            placeholder={props.task.task.description}
+                        />
+                        <label>
+                            Completed
+                            <input 
+                                onClick={handleIsComplete}
+                                value={props.task.task.completed}
+                                type={'checkbox'}
+                            />
+                        </label>
+                        <button 
+                            onClick={() => handleUpdateTodo()}
+                            style={{ color: 'blue'}}
+                        >
+                            Update
+                        </button>
+                    </div>
+                // End-of-Ternary
+            }
 
-                    <button 
-                        onClick={handleIsEditable}
-                        style={{ color: 'green'}}
-                    >
-                        Edit
-                    </button>
+            <button 
+                onClick={handleIsEditable}
+                style={{ color: 'green'}}
+            >
+                Edit
+            </button>
 
-                    <DeleteTask taskID={props.task.id} />
-                </p>
-            </div>
-        </div>
+            <DeleteTask taskID={props.task.task._id} />
+        </p>
     );
 }

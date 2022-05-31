@@ -6,8 +6,6 @@ import EditTask from '../TaskMethods/EditTask';
 
 export default function TaskItem(props) {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center'}}>
-            <EditTask task={props} />
-        </div>
+        <EditTask task={props} />
     );
 }

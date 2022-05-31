@@ -29,12 +29,14 @@ const TodoListView = () => {
     };
     
     return (
-        <div className="TaskListView">
-		    <h1>TaskAway</h1>
-            <ul>
-                { tasks }
-            </ul>
-            <AddTask />
+        <div style={{ display: 'flex', justifyContent: 'center'}}>
+            <div className="TaskListView" style={{ width: '500px' }}>
+                <h1>TaskAway</h1>
+                <ul>
+                    { tasks }
+                </ul>
+                <AddTask />
+            </div>
         </div>
     );
 };

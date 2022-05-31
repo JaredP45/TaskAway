@@ -3,7 +3,7 @@
 // Relative imports
 import TaskAwayAPI from '../api/api';
 
-const DeleteTask = (taskID) => {
+const DeleteTask = ({ taskID }) => {
 
     const handleDeleteTodo = () => {
         TaskAwayAPI.deleteTask(taskID);
