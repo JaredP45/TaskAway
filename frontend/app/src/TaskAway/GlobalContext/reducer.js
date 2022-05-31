@@ -15,20 +15,20 @@ const Reducer = (state, action) => {
                 ...state,
                 desc: action.payload
             };
-        case 'SET_IS_COMPLETE':
+        case 'SET_IS_TASK_COMPLETE':
             return {
                 ...state,
-                isComplete: action.payload
+                isTaskComplete: action.payload
             };
-        case 'SET_IS_EDITABLE':
+        case 'SET_IS_TASK_LOADING':
             return {
                 ...state,
-                isEditable: action.payload
+                isTaskLoading: action.payload
             };
-        case 'SET_IS_LOADING':
+        case 'SET_IS_TASK_EDITABLE':
             return {
                 ...state,
-                isLoading: action.payload
+                isTaskEditable: action.payload
             };
         case 'GET_ERROR':
             return {

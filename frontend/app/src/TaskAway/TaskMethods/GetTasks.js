@@ -14,7 +14,7 @@ const GetTasks = () =>{
 	useEffect(() => {
 		const fetchAllTasks = () => {
 			TaskAwayAPI.retrieveTask().then(response => {
-                dispatch({ type: 'SET_IS_LOADING', payload: false });
+                dispatch({ type: 'SET_IS_TASK_LOADING', payload: false });
 				dispatch({ type: 'SET_TASKLIST', payload: response.data });
 			});
 		}	

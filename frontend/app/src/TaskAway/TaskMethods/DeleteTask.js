@@ -3,16 +3,16 @@
 // Relative imports
 import TaskAwayAPI from '../api/api';
 
-const DeleteTask = ({ taskID }) => {
+const DeleteTask = ({ taskToDelete }) => {
 
-    const handleDeleteTodo = () => {
-        TaskAwayAPI.deleteTask(taskID);
+    const handleDeleteTask = () => {
+        TaskAwayAPI.deleteTask(taskToDelete);
     };
 
     return (
         <div className="DeleteTask">
             <button 
-                onClick={() => handleDeleteTodo()}
+                onClick={() => handleDeleteTask()}
                 style={{ color: 'red'}}
             >
                 Delete

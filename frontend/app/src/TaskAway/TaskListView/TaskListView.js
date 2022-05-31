@@ -17,7 +17,7 @@ const TodoListView = () => {
     GetTasks();
     let tasks = [{}];
 
-    if (state.isLoading) {
+    if (state.isTaskLoading) {
         tasks = <p>Loading...</p>;
     };
 
@@ -25,12 +25,12 @@ const TodoListView = () => {
         tasks = <p>Something went wrong: <span>{ state.error }</span></p>;
     };
 
-    if (!state.isLoading && !state.error && state.taskList) {
+    if (!state.isTaskLoading && !state.error && state.taskList) {
         tasks = state.taskList.map((task, index )=> {
             return <TaskItem task={task} key={index} />;
         });
     };
-    
+
     return (
         <div style={{ display: 'flex', justifyContent: 'center'}}>
             <div className="TaskListView" style={{ width: '500px' }}>

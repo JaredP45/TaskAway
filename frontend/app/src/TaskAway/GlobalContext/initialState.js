@@ -2,7 +2,8 @@ export const initialState = {
     taskList: [{}],
 	title: '',
 	desc: '',
-    isComplete: false,
-    isLoading: true,
+    isTaskComplete: false,
+    isTaskLoading: true,
+    isTaskEditable: false,
     error: null,
 };

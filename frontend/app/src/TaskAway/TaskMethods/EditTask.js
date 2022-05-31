@@ -8,31 +8,17 @@ import TaskAwayAPI from '../api/api';
 export default function EditTasks(props) {
 	const [state, dispatch] = useContext(Context);
 
-    const handleIsComplete = () => {
-		dispatch({ type: 'SET_IS_COMPLETE', payload: !state.isComplete })
+    const handleIsTaskComplete = () => {
+		dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: !state.isTaskComplete })
 	};
 
-    const handleUpdateTodo = () => {
-        TaskAwayAPI.updateTask(props.task.task._id, state.title, state.desc, state.isComplete);
+    const handleUpdateTask = () => {
+        TaskAwayAPI.updateTask(props.task.task._id, state.title, state.desc, state.isTaskComplete);
             
-        dispatch(
-			{ 
-				type: 'SET_TITLE', 
-				payload: '',        
-			}
-        );
-        dispatch (
-			{ 
-				type: 'SET_DESCRIPTION', 
-				payload: '',        
-			}
-        );
-        dispatch (
-			{ 
-				type: 'SET_IS_COMPLETE', 
-				payload: false,        
-			}
-		);
+        dispatch({ type: 'SET_TITLE', payload: '', });
+        dispatch({ type: 'SET_DESCRIPTION', payload: '', });
+        dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: false, });
+        dispatch({ type: 'SET_IS_TASK_EDITABLE', payload: false, });
     };
     
     return (
@@ -51,13 +37,13 @@ export default function EditTasks(props) {
                 <label>
                     Completed
                     <input 
-                        onClick={handleIsComplete}
+                        onClick={handleIsTaskComplete}
                         value={props.task.task.completed}
                         type={'checkbox'}
                     />
                 </label>
                 <button 
-                    onClick={() => handleUpdateTodo()}
+                    onClick={() => handleUpdateTask()}
                     style={{ color: 'blue'}}
                 >
                     Update

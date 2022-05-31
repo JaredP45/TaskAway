@@ -12,30 +12,15 @@ const TodoAdd = () => {
 	const [state, dispatch] = useContext(Context);
 
 	const handleAddTodo = () => {
-		TaskAwayAPI.createTask(state.title, state.desc, state.isComplete);
+		TaskAwayAPI.createTask(state.title, state.desc, state.isTaskComplete);
 
-        dispatch(
-			{ 
-				type: 'SET_TITLE', 
-				payload: '',
-			}
-        );
-        dispatch (
-			{ 
-				type: 'SET_DESCRIPTION', 
-				payload: '',
-			}
-        );
-        dispatch (
-			{ 
-				type: 'SET_IS_COMPLETE', 
-				payload: false,
-			}
-		);
+        dispatch({ type: 'SET_TITLE', payload: '', });
+        dispatch({ type: 'SET_DESCRIPTION', payload: '', });
+        dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: false, });
 	};
 
-	const handleIsComplete = () => {
-		dispatch({ type: 'SET_IS_COMPLETE', payload: !state.isComplete })
+	const handleIsTaskComplete = () => {
+		dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: !state.isTaskComplete })
 	};
 
 	return (
@@ -54,8 +39,8 @@ const TodoAdd = () => {
 			<label>
 				Completed
 				<input
-					onClick={handleIsComplete}
-					value={state.isComplete}
+					onClick={handleIsTaskComplete}
+					value={state.isTaskComplete}
 					type={'checkbox'}
 				/>
 			</label>

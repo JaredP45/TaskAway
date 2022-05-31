@@ -10,13 +10,13 @@ export default function TaskItem(props) {
 	const [state, dispatch] = useContext(Context);
 
     const handleIsEditable = () => {
-        dispatch({ type: 'SET_TASKLIST', payload: !state.TaskList.isTaskEditable })
+        dispatch({ type: 'SET_IS_TASK_EDITABLE', payload: !state.isTaskEditable })
     };
-
+    
     return (
         <div className="TaskItem">
-            {/* { (!state.TaskList.isTaskEditable)
-                ? */}
+            { (!state.isTaskEditable)
+                ?
                     <div>
                         <span style={{ fontWeight: 'bold' }}>
                             { props.task.title }
@@ -24,11 +24,11 @@ export default function TaskItem(props) {
                         { props.task.description }
                         { props.task.completed ? "completed" : "not completed" }
                     </div>
-                {/* :
+                :
 
-                    <EditTask task={props} key={props.task._id} />
+                    <EditTask task={props} />
                 // End-of-Ternary
-            } */}
+            }
             <button 
                 onClick={handleIsEditable}
                 style={{ color: 'green'}}
@@ -36,7 +36,7 @@ export default function TaskItem(props) {
                 Edit
             </button>
 
-            <DeleteTask taskID={props.task._id} />
+            <DeleteTask taskToDelete={props.task._id} />
         </div>
     );
 }
