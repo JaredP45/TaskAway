@@ -1,5 +1,5 @@
 // Module Imports
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
 // Relative Imports
 import { Context } from '../TodoContextMain';
@@ -10,21 +10,6 @@ import '../../App.css';
 
 const TodoAdd = () => {
 	const [state, dispatch] = useContext(Context);
-
-	useEffect(() => {
-		const fetchAllTasks = () => {
-			TaskAwayAPI.retrieveTask().then(response => {
-				dispatch({ type: 'SET_TODOLIST', payload: response.data });
-			});
-		}	
-
-		const interval = setInterval(fetchAllTasks, 1000)
-
-		return () => {
-			clearInterval(interval)
-		}
-
-	}, [dispatch, state.todoList]);
 
 	const handleAddTodo = () => {
 		TaskAwayAPI.createTask(state.title, state.desc, state.isComplete);
@@ -50,7 +35,7 @@ const TodoAdd = () => {
 	};
 
 	return (
-		<div className="App">
+		<div className="AddTask">
 			<p>Add Todo</p>
 			<input 
 				onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}

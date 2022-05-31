@@ -2,19 +2,17 @@
 import React from 'react';
 
 // Relative Imports
-import TodoMain from './TaskAway/TodoMain';
-import TodoListView from './TaskAway/TodoListView/TodoListView';
-import TodoAdd from './TaskAway/TodoAdd/TodoAdd';
+import TodoContextMain from './TaskAway/TodoContextMain';
+import TaskListView from './TaskAway/TaskListView/TaskListView';
 
 
 // Style Imports
 
 const App = () => {
 	return (
-		<TodoMain>
-			<TodoListView />
-			<TodoAdd />
-		</TodoMain>
+		<TodoContextMain>
+			<TaskListView />
+		</TodoContextMain>
 	);
 }
 

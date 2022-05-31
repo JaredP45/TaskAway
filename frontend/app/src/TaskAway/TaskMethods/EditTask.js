@@ -2,16 +2,13 @@
 import React, { useState, useContext } from 'react';
 
 // Relative imports
-import {Context} from '../TodoMain';
+import {Context} from '../TodoContextMain';
 import TaskAwayAPI from '../api/api';
+import DeleteTask from './DeleteTask';
 
-export default function Todo(props) {
+export default function EditTasks(props) {
 	const [state, dispatch] = useContext(Context);
     const [isEditable, setIsEditable] = useState(false);
-
-    const handleDeleteTodo = () => {
-        TaskAwayAPI.deleteTask(props.todo._id);
-    };
 
     const handleIsEditable = () => {
         setIsEditable(!isEditable);
@@ -22,7 +19,7 @@ export default function Todo(props) {
 	};
 
     const handleUpdateTodo = () => {
-        TaskAwayAPI.updateTask(props.todo._id, state.title, state.desc, state.isComplete);
+        TaskAwayAPI.updateTask(props._id, state.title, state.desc, state.isComplete);
         handleIsEditable();
 
         dispatch(
@@ -42,35 +39,35 @@ export default function Todo(props) {
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center'}}>
+        <div className="EditTask" style={{ display: 'flex', justifyContent: 'center'}}>
             <div style={{ width: '500px' }}>
                 <p>
                     { (!isEditable)
                         ?
                             <div>
                                 <span style={{ fontWeight: 'bold' }}>
-                                    { props.todo.title }
+                                    { props.task.title }
                                 </span>
-                                { props.todo.description }
-                                { props.todo.completed ? "completed" : "not completed" }
+                                { props.task.description }
+                                { props.task.completed ? "completed" : "not completed" }
                             </div>
                         :
                             <div>
                                 <input 
                                     onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
                                     value={state.title}
-                                    placeholder={props.todo.title}
+                                    placeholder={props.task.title}
                                 />
                                 <input 
                                     onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
                                     value={state.desc}
-                                    placeholder={props.todo.description}
+                                    placeholder={props.task.description}
                                 />
                                 <label>
                                     Completed
                                     <input 
                                         onClick={handleIsComplete}
-                                        value={state.isComplete}
+                                        value={props.task.completed}
                                         type={'checkbox'}
                                     />
                                 </label>
@@ -91,12 +88,7 @@ export default function Todo(props) {
                         Edit
                     </button>
 
-                    <button 
-                        onClick={() => handleDeleteTodo()}
-                        style={{ color: 'red'}}
-                    >
-                        Delete
-                    </button>
+                    <DeleteTask taskID={props.task.id} />
                 </p>
             </div>
         </div>

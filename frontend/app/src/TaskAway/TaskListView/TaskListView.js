@@ -2,8 +2,10 @@
 import React, { useContext } from 'react';
 
 // Relative Imports
-import TodoItem from '../Todo/TodoItem';
-import { Context } from '../TodoMain';
+import TaskItem from '../Task/TaskItem';
+import AddTask from '../TaskMethods/AddTask';
+import GetTasks from '../TaskMethods/GetTasks';
+import { Context } from '../TodoContextMain';
 
 // Style Imports
 import '../../App.css';
@@ -11,6 +13,8 @@ import '../../App.css';
 
 const TodoListView = () => {
 	const [state, ] = useContext(Context);
+
+    GetTasks();
     
     let tasks = <p>Loading...</p>;
 
@@ -20,16 +24,17 @@ const TodoListView = () => {
 
     if (!state.error && state.todoList) {
         tasks = state.todoList.map(task => {
-            return <TodoItem todo={task} />;
+            return <TaskItem task={task} />;
         });
     };
     
     return (
-        <div className="App">
+        <div className="TaskListView">
 		    <h1>TaskAway</h1>
             <ul>
                 { tasks }
             </ul>
+            <AddTask />
         </div>
     );
 };
