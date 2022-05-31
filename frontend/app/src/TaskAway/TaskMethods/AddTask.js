@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 
 // Relative Imports
-import { Context } from '../TodoContextMain';
+import { Context } from '../TaskContextMain';
 import TaskAwayAPI from '../api/api';
 
 // Style Imports
@@ -18,11 +18,15 @@ const TodoAdd = () => {
 			{ 
 				type: 'SET_TITLE', 
 				payload: '',
-			},
+			}
+        );
+        dispatch (
 			{ 
 				type: 'SET_DESCRIPTION', 
 				payload: '',
-			},
+			}
+        );
+        dispatch (
 			{ 
 				type: 'SET_IS_COMPLETE', 
 				payload: false,
@@ -43,7 +47,7 @@ const TodoAdd = () => {
                 placeholder='Title'
 			/>
 			<input 
-				onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
+				onChange={(event) => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
                 value={state.desc}
 				placeholder='Description'
 			/>

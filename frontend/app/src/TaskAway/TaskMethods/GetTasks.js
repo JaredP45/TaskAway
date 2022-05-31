@@ -1,8 +1,8 @@
 // Module Imports
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 
 // Relative Imports
-import { Context } from '../TodoContextMain';
+import { Context } from '../TaskContextMain';
 import TaskAwayAPI from '../api/api';
 
 // Style Imports
@@ -14,7 +14,8 @@ const GetTasks = () =>{
 	useEffect(() => {
 		const fetchAllTasks = () => {
 			TaskAwayAPI.retrieveTask().then(response => {
-				dispatch({ type: 'SET_TODOLIST', payload: response.data });
+                dispatch({ type: 'SET_IS_LOADING', payload: false });
+				dispatch({ type: 'SET_TASKLIST', payload: response.data });
 			});
 		}	
 
@@ -24,7 +25,7 @@ const GetTasks = () =>{
 			clearInterval(interval)
 		}
 
-	}, [dispatch, state.todoList]);
+	}, [dispatch, state.taskList]);
 }
 
 export default GetTasks;

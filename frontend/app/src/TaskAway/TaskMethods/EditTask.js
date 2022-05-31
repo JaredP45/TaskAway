@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 
 // Relative imports
-import {Context} from '../TodoContextMain';
+import {Context} from '../TaskContextMain';
 import TaskAwayAPI from '../api/api';
 import DeleteTask from './DeleteTask';
 
@@ -21,16 +21,20 @@ export default function EditTasks(props) {
     const handleUpdateTodo = () => {
         TaskAwayAPI.updateTask(props.task.task._id, state.title, state.desc, state.isComplete);
         handleIsEditable();
-
+            
         dispatch(
 			{ 
 				type: 'SET_TITLE', 
 				payload: '',        
-			},
+			}
+        );
+        dispatch (
 			{ 
 				type: 'SET_DESCRIPTION', 
 				payload: '',        
-			},
+			}
+        );
+        dispatch (
 			{ 
 				type: 'SET_IS_COMPLETE', 
 				payload: false,        
@@ -39,7 +43,7 @@ export default function EditTasks(props) {
     };
 
     return (
-        <p>
+        <div className="EditTask">
             { (!isEditable)
                 ?
                     <div>
@@ -78,7 +82,7 @@ export default function EditTasks(props) {
                     </div>
                 // End-of-Ternary
             }
-
+            
             <button 
                 onClick={handleIsEditable}
                 style={{ color: 'green'}}
@@ -87,6 +91,6 @@ export default function EditTasks(props) {
             </button>
 
             <DeleteTask taskID={props.task.task._id} />
-        </p>
+        </div>
     );
 }

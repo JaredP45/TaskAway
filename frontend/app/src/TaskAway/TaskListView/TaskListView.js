@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import TaskItem from '../Task/TaskItem';
 import AddTask from '../TaskMethods/AddTask';
 import GetTasks from '../TaskMethods/GetTasks';
-import { Context } from '../TodoContextMain';
+import { Context } from '../TaskContextMain';
 
 // Style Imports
 import '../../App.css';
@@ -15,15 +15,18 @@ const TodoListView = () => {
 	const [state, ] = useContext(Context);
 
     GetTasks();
-    
-    let tasks = <p>Loading...</p>;
+    let tasks = '';
+
+    if (state.isLoading) {
+        tasks = <p>Loading...</p>;
+    };
 
     if (state.error) {
         tasks = <p>Something went wrong: <span>{ state.error }</span></p>;
     };
 
-    if (!state.error && state.todoList) {
-        tasks = state.todoList.map(task => {
+    if (!state.isLoading && !state.error && state.taskList) {
+        tasks = state.taskList.map(task => {
             return <TaskItem task={task} />;
         });
     };

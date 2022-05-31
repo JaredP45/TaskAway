@@ -1,7 +1,8 @@
 export const initialState = {
-    todoList: [{}],
+    taskList: [{}],
 	title: '',
 	desc: '',
     isComplete: false,
+    isLoading: true,
     error: null,
 };

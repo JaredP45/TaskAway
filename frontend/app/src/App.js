@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Relative Imports
-import TodoContextMain from './TaskAway/TodoContextMain';
+import TaskContextMain from './TaskAway/TaskContextMain';
 import TaskListView from './TaskAway/TaskListView/TaskListView';
 
 
@@ -10,9 +10,9 @@ import TaskListView from './TaskAway/TaskListView/TaskListView';
 
 const App = () => {
 	return (
-		<TodoContextMain>
+		<TaskContextMain>
 			<TaskListView />
-		</TodoContextMain>
+		</TaskContextMain>
 	);
 }
 
