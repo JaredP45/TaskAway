@@ -14,11 +14,10 @@ export default function EditTasks(props) {
 
     const handleUpdateTask = () => {
         TaskAwayAPI.updateTask(props.task.task._id, state.title, state.desc, state.isTaskComplete);
-            
+
         dispatch({ type: 'SET_TITLE', payload: '', });
         dispatch({ type: 'SET_DESCRIPTION', payload: '', });
         dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: false, });
-        dispatch({ type: 'SET_IS_TASK_EDITABLE', payload: false, });
     };
     
     return (

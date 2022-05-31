@@ -1,21 +1,20 @@
 // Module Imports
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 
 // Relative imports
-import {Context} from '../TaskContextMain';
 import EditTask from '../TaskMethods/EditTask';
 import DeleteTask from '../TaskMethods/DeleteTask';
 
 export default function TaskItem(props) {
-	const [state, dispatch] = useContext(Context);
-
-    const handleIsEditable = () => {
-        dispatch({ type: 'SET_IS_TASK_EDITABLE', payload: !state.isTaskEditable })
-    };
+    const [isTaskEditable, setIsTaskEditable] = useState(false);
+    
+    const handleIsTaskEditable = () => {
+        setIsTaskEditable(!isTaskEditable);
+    }
     
     return (
         <div className="TaskItem">
-            { (!state.isTaskEditable)
+            { (!isTaskEditable)
                 ?
                     <div>
                         <span style={{ fontWeight: 'bold' }}>
@@ -30,7 +29,7 @@ export default function TaskItem(props) {
                 // End-of-Ternary
             }
             <button 
-                onClick={handleIsEditable}
+                onClick={handleIsTaskEditable}
                 style={{ color: 'green'}}
             >
                 Edit
