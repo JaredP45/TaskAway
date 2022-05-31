@@ -1,6 +1,9 @@
 export const initialState = {
-    todoList: [{}],
+    taskList: [{}],
 	title: '',
 	desc: '',
+    isTaskComplete: false,
+    isTaskLoading: true,
+    isTaskEditable: false,
     error: null,
 };

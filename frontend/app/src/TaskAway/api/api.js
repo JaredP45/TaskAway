@@ -1,11 +1,18 @@
 // Module Imports
 import axios from 'axios';
 
-const TASKAWAY_API_BASE_URL = "http://localhost:8000/api/todo/";
+const TASKAWAY_API_BASE_URL = "http://localhost:8001/tasks/";
 
 class TaskAwayAPI {
-    async createTask(uid, title, desc) {
-        const response = await axios.post(`${TASKAWAY_API_BASE_URL}`, { 'title': title, 'description': desc })
+    async createTask(title, desc, isComplete) {
+        const response = await axios.post(`${TASKAWAY_API_BASE_URL}`, { 
+            'title': title, 
+            'description': desc,
+            "created_on": "2022-05-28T00:00:00",
+            "expires_on": "2022-05-28T00:00:00",
+            "completed_on": "2022-05-28T00:00:00", 
+            'completed': isComplete 
+        });
         console.log(response);
     }
 
@@ -14,13 +21,20 @@ class TaskAwayAPI {
         return response;
     }
 
-    async updateTask(title, desc) {
-        const response = await axios.put(`${TASKAWAY_API_BASE_URL}${title}?desc=${desc}`, { 'title': title, 'description': desc });
+    async updateTask(id, title, desc, isComplete) {
+        const response = await axios.put(`${TASKAWAY_API_BASE_URL}${id}`, { 
+            'title': title, 
+            'description': desc,
+            "created_on": "2022-05-28T00:00:00",
+            "expires_on": "2022-05-28T00:00:00",
+            "completed_on": "2022-05-28T00:00:00",
+            'completed': isComplete
+        });
         console.log(response);
     }
 
-    async deleteTask(title) {
-        const response = await axios.delete(`${TASKAWAY_API_BASE_URL}${title}`);
+    async deleteTask(id) {
+        const response = await axios.delete(`${TASKAWAY_API_BASE_URL}${id}`);
         console.log(response);
     }
 };

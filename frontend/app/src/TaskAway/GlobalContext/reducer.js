@@ -1,9 +1,9 @@
 const Reducer = (state, action) => {
     switch (action.type) {
-        case 'SET_TODOLIST':
+        case 'SET_TASKLIST':
             return {
                 ...state,
-                todoList: action.payload
+                taskList: action.payload
             };
         case 'SET_TITLE':
             return {
@@ -14,6 +14,21 @@ const Reducer = (state, action) => {
             return {
                 ...state,
                 desc: action.payload
+            };
+        case 'SET_IS_TASK_COMPLETE':
+            return {
+                ...state,
+                isTaskComplete: action.payload
+            };
+        case 'SET_IS_TASK_LOADING':
+            return {
+                ...state,
+                isTaskLoading: action.payload
+            };
+        case 'SET_IS_TASK_EDITABLE':
+            return {
+                ...state,
+                isTaskEditable: action.payload
             };
         case 'GET_ERROR':
             return {
