@@ -1,18 +1,19 @@
 // Module Imports
 import React, { useContext } from 'react';
+import Alert from '@mui/material/Alert';
+import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 // Relative Imports
 import { Context } from '../TaskContextMain';
 import TaskAwayAPI from '../api/api';
-import { Button, Checkbox, Input, message } from 'antd';
 
 // Style Imports
 import '../../App.css';
 
 const TodoAdd = () => {
 	const [state, dispatch] = useContext(Context);
-
-	const { TextArea } = Input;
 
 	const handleAddTodo = () => {
 		TaskAwayAPI.createTask(state.title, state.desc, state.isTaskComplete);
@@ -21,7 +22,9 @@ const TodoAdd = () => {
         dispatch({ type: 'SET_DESCRIPTION', payload: '', });
         dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: false, });
 
-		message.success('Task created!');
+		return (
+			<Alert onClose={() => {}}>Task Created!</Alert>
+		);
 	};
 
 	const handleIsTaskComplete = () => {
@@ -32,16 +35,19 @@ const TodoAdd = () => {
 		<div className="AddTask">
 			<div>
 				<h3>Add Todo</h3>
-				<Input 
+				<TextField 
+					variant="outlined"
 					onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
 					value={state.title}
-					placeholder='Title'
+					placeholder="Title"
 				/>
-				<TextArea
-					rows={3} 
+				<TextField
+					maxRow={3}
+					multiline
+					variant="outlined"
 					onChange={(event) => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
 					value={state.desc}
-					placeholder='Description'
+					placeholder="Description"
 				/>
 				<label>
 					<small>Completed</small>

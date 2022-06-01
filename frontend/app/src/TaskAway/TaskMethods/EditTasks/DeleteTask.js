@@ -1,5 +1,5 @@
 // Module Imports
-import { Button } from 'antd';
+import Button from '@mui/material/Button';
 
 // Relative imports
 import TaskAwayAPI from '../../api/api';

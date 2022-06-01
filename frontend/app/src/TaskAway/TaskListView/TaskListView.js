@@ -1,13 +1,12 @@
 // Module Imports
 import React, { useContext, useEffect, useState } from 'react';
-import { Col, Row, Timeline, Spin, message } from "antd";
-import { CheckCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
-import "antd/dist/antd.css";
+import Timeline from '@mui/lab/Timeline';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Button, Grid, Box } from '@mui/material';
 
 // Relative Imports
 import TaskItem from '../TaskItem/TaskItem';
 import AddTask from '../TaskMethods/AddTask';
-import TaskMenuOptions from '../TaskMenuOptions/TaskMenuOptions';
 import GetTasks from '../TaskMethods/GetTasks';
 import { Context } from '../TaskContextMain';
 
@@ -18,6 +17,15 @@ import '../../App.css';
 const TodoListView = () => {
 	const [state, ] = useContext(Context);
     const [timeline, setTimeline] = useState();
+    const [message, setMessage] = useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+    });
+
+    const handleMessageClick = () => {
+        setMessage({ open: true });
+    }
 
     GetTasks();
 
@@ -25,37 +33,25 @@ const TodoListView = () => {
         const timelineItems =  state.taskList.reverse().map((task, index ) => {
             if (state.isTaskLoading) {
                 return (
-                    <Spin />
+                    <CircularProgress />
                 );
             };
 
             if (state.error) {
-                message.error('Something went wrong: ' + state.error);
+                return (
+                    <Button
+                        onClick={handleMessageClick()}
+                    >
+                        Something went wrong: {state.error}
+                    </Button>
+                );
             }
 
             if (state.taskList && !state.isTaskLoading && !state.error) {
                 return task.completed ? (
-                    <div style={{ display: 'flex' }}>
-                        <Timeline.Item
-                            dot={<CheckCircleOutlined />}
-                            color="green"
-                            style={{ textDecoration: "line-through", color: "green" }}
-                        >
-                            {task.title} <small>{task.description}</small>
-                        </Timeline.Item>
-                        <TaskMenuOptions task={task} key={index} />
-                    </div>
+                    <TaskItem isComplete={task.completed} task={task} index={index} />
                 ) : (
-                    <div style={{ display: 'flex' }}>
-                        <Timeline.Item
-                            dot={<MinusCircleOutlined />}
-                            color="blue"
-                            style={{ textDecoration: "initial" }}
-                        >
-                            {task.title} <small>{task.description}</small>
-                        </Timeline.Item>
-                        <TaskMenuOptions task={task} key={index} />
-                    </div>
+                    <TaskItem isComplete={task.completed} task={task} index={index} />
                 )
             }
         })
@@ -65,13 +61,15 @@ const TodoListView = () => {
 
     return (
         <>
-            <Row style={{ marginTop: 50 }}>
-                <Col span={7} offset={5}>
-                    <h1>TaskAway</h1>
-                    <Timeline mode="left">{timeline}</Timeline>
-                </Col>
+            <Box sx={{ marginTop: 10 }}>
+                <Grid container>
+                    <Grid item>
+                        <h1>TaskAway</h1>
+                        <Timeline>{timeline}</Timeline>
+                    </Grid>
+                </Grid>
                 <AddTask />
-            </Row>
+            </Box>
         </>
     );
 };

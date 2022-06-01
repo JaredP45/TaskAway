@@ -1,6 +1,6 @@
 // Module Imports
-import { Button } from 'antd';
 import React, { useContext } from 'react';
+import Button from '@mui/material/Button';
 
 // Relative imports
 import TaskAwayAPI from '../../api/api';

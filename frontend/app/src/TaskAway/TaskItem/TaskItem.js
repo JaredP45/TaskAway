@@ -1,41 +1,57 @@
 // Module Imports
-import React, { useState } from 'react';
+import React from 'react';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 // Relative imports
-import EditTask from '../TaskMethods/EditTasks/EditTask';
-import DeleteTask from '../TaskMethods/EditTasks/DeleteTask';
+import TaskMenuOptions from "../TaskMenuOptions/TaskMenuOptions";
 
-export default function TaskItem(props) {
-    const [isTaskEditable, setIsTaskEditable] = useState(false);
-    
-    const handleIsTaskEditable = () => {
-        setIsTaskEditable(!isTaskEditable);
-    }
-    
+
+export default function TaskItem({ isComplete, task, index }) {
+
+    const handleIsCompleteCircleIcon = () => {
+        return (
+            isComplete ? (
+                <CheckCircleIcon fontSize="small" />
+            ) : (
+                <RemoveCircleIcon fontSize="small" />
+            )
+        );
+    };
+
+    const handleIsCompleteCircleColor = () => {
+        if (isComplete) {
+            return "success";
+        } else {
+            return "primary";
+        }
+    };
+
+    const handleIsCompleteLineThrough = () => {
+        if (isComplete) {
+            return { textDecoration: 'line-through' };
+        } else {
+            return null;
+        }
+    };
+
     return (
         <div className="TaskItem">
-            { (!isTaskEditable)
-                ?
-                    <div>
-                        <span style={{ fontWeight: 'bold' }}>
-                            { props.task.title }
-                        </span>
-                        { props.task.description }
-                        { props.task.completed ? "completed" : "not completed" }
-                    </div>
-                :
-
-                    <EditTask task={props} />
-                // End-of-Ternary
-            }
-            <button 
-                onClick={handleIsTaskEditable}
-                style={{ color: 'green'}}
-            >
-                Edit
-            </button>
-
-            <DeleteTask taskToDelete={props.task._id} />
+            <TimelineItem>
+                <TimelineSeparator>
+                    <TimelineDot color={handleIsCompleteCircleColor()}>
+                        {handleIsCompleteCircleIcon()}    
+                    </TimelineDot>
+                    <TimelineConnector />
+                </TimelineSeparator>
+                <TimelineContent style={handleIsCompleteLineThrough()}>{task.title} <small>{task.description}</small></TimelineContent>
+                <TaskMenuOptions task={task} key={index} />
+            </TimelineItem>
         </div>
     );
 }

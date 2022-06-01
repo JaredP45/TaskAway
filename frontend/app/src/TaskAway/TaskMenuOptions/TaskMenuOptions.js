@@ -1,7 +1,6 @@
 // Module Imports
 import React, { useState } from 'react';
-import { EllipsisOutlined } from '@ant-design/icons';
-import "antd/dist/antd.css";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 // Relative imports
 import EditTask from '../TaskMethods/EditTasks/EditTask';
@@ -14,11 +13,11 @@ export default function TaskMenuOptions(props) {
     }
     
     return (
-        <div className="TaskMenuOptions" style={{ display: 'flex' }}>
+        <div className="TaskMenuOptions">
             <div 
                 onClick={handleIsTaskEditable}
             >
-                <EllipsisOutlined />
+                <MoreHorizIcon />
             </div>
             { (!isTaskEditable)
                 ?

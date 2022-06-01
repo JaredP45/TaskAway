@@ -1,24 +1,22 @@
 // Module Imports
 import React, { useContext } from 'react';
-import { Checkbox, Input } from 'antd';
+import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
 
 // Relative imports
 import {Context} from '../../TaskContextMain';
 import DeleteTask from './DeleteTask';
 import UpdateTask from './UpdateTask';
 
+
 export default function EditTasks({ task }) {
 	const [state, dispatch] = useContext(Context);
-
-    const { TextArea } = Input;
 
     const handleIsTaskComplete = () => {
 		dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: !state.isTaskComplete })
 	};
 
     const handleTaskFieldChange = (taskValue, stateValue) => {
-        console.log("taskVal: " + taskValue);
-        console.log("stateVal: " + stateValue);
         if (stateValue !== '') {
             return stateValue;
         } else {
@@ -41,12 +39,15 @@ export default function EditTasks({ task }) {
                 </label>
                 
                 <div>
-                    <Input 
+                    <TextField 
+                        variant="outlined"
                         onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
                         value={handleTaskFieldChange(task.task.title, state.title)}
                     />
-                    <TextArea
-                        rows={3} 
+                    <TextField
+                        maxRow={3}
+                        multiline
+                        variant="outlined"
                         onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
                         value={handleTaskFieldChange(task.task.description, state.desc)}
                     />
