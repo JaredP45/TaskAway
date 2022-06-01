@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 // Relative imports
-import EditTask from '../TaskMethods/EditTask';
-import DeleteTask from '../TaskMethods/DeleteTask';
+import EditTask from '../TaskMethods/EditTasks/EditTask';
+import DeleteTask from '../TaskMethods/EditTasks/DeleteTask';
 
 export default function TaskItem(props) {
     const [isTaskEditable, setIsTaskEditable] = useState(false);

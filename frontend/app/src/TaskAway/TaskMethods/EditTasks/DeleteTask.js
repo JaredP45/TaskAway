@@ -1,22 +1,23 @@
 // Module Imports
+import { Button } from 'antd';
 
 // Relative imports
-import TaskAwayAPI from '../api/api';
+import TaskAwayAPI from '../../api/api';
 
-const DeleteTask = ({ taskToDelete }) => {
+const DeleteTask = ({ taskID }) => {
 
     const handleDeleteTask = () => {
-        TaskAwayAPI.deleteTask(taskToDelete);
+        TaskAwayAPI.deleteTask(taskID);
     };
 
     return (
         <div className="DeleteTask">
-            <button 
+            <Button 
                 onClick={() => handleDeleteTask()}
                 style={{ color: 'red'}}
             >
                 Delete
-            </button>
+            </Button>
         </div>
     );
 }
