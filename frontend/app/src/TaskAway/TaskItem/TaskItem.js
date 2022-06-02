@@ -5,8 +5,8 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircleSharp';
+import RemoveCircleIcon from '@mui/icons-material/PendingSharp';
 
 // Relative imports
 import TaskMenuOptions from "../TaskMenuOptions/TaskMenuOptions";

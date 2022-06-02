@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Timeline from '@mui/lab/Timeline';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Button, Grid, Box } from '@mui/material';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 
 // Relative Imports
 import TaskItem from '../TaskItem/TaskItem';
@@ -64,7 +65,10 @@ const TodoListView = () => {
             <Box sx={{ marginTop: 10 }}>
                 <Grid container>
                     <Grid item>
-                        <h1>TaskAway</h1>
+                        <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+                            <h1 style={{ padding: '5px'}}>TaskAway</h1>
+                            <AddBoxOutlinedIcon />
+                        </div>
                         <Timeline>{timeline}</Timeline>
                     </Grid>
                 </Grid>
