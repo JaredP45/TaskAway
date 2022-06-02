@@ -12,7 +12,7 @@ import RemoveCircleIcon from '@mui/icons-material/PendingSharp';
 import TaskMenuOptions from "../TaskMenuOptions/TaskMenuOptions";
 
 
-export default function TaskItem({ isComplete, task, index }) {
+export default function TaskItemView({ isComplete, task, index }) {
 
     const handleIsCompleteCircleIcon = () => {
         return (
@@ -41,7 +41,7 @@ export default function TaskItem({ isComplete, task, index }) {
     };
 
     return (
-        <div className="TaskItem">
+        <div className="TaskItemView">
             <TimelineItem>
                 <TimelineSeparator>
                     <TimelineDot color={handleIsCompleteCircleColor()}>

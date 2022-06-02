@@ -6,9 +6,10 @@ import { Button, Grid, Box } from '@mui/material';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 
 // Relative Imports
-import TaskItem from '../TaskItem/TaskItem';
+import TaskItem from '../TaskItemView/TaskItemView';
 import AddTask from '../TaskMethods/AddTask';
 import GetTasks from '../TaskMethods/GetTasks';
+import TaskTooltip from '../utils/popups/TaskTooltip';
 import { Context } from '../GlobalContext/TaskContextMain';
 
 // Style Imports
@@ -35,7 +36,7 @@ const TodoListView = () => {
 
     const handleMessageClick = () => {
         setMessage({ open: true });
-    }
+    };
 
     GetTasks();
 
@@ -77,7 +78,11 @@ const TodoListView = () => {
                         <div style={{ display: 'inline-flex', alignItems: 'center' }}>
                             <h1 style={{ padding: '5px'}}>TaskAway</h1>
                             <div onClick={handleIsTaskDialogOpen}>
-                                <AddBoxOutlinedIcon />
+
+                                <TaskTooltip
+                                    component={<AddBoxOutlinedIcon />}
+                                    label="Add New Task"
+                                />
                             </div>
                             { (!isTaskDialogOpen)
                                 ?

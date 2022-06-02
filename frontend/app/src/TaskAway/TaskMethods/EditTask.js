@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 // Relative imports
 import {Context} from '../GlobalContext/TaskContextMain';
 import TaskAwayAPI from '../api/api';
-import TaskFormDialog from '../dialog/TaskFormDialog';
+import TaskFormDialog from '../utils/dialogs/TaskFormDialog';
 
 
 export default function EditTasks({ task, isDialogOpen, handleCloseDialog }) {

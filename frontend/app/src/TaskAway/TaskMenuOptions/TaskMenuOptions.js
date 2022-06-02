@@ -4,6 +4,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 // Relative imports
 import EditTask from '../TaskMethods/EditTask';
+import TaskTooltip from '../utils/popups/TaskTooltip';
 
 
 export default function TaskMenuOptions(props) {
@@ -22,7 +23,10 @@ export default function TaskMenuOptions(props) {
             <div 
                 onClick={handleIsTaskDialogOpen}
             >
-                <MoreHorizIcon />
+                <TaskTooltip
+                    component={<MoreHorizIcon />}
+                    label="Edit this Task"
+                />
             </div>
             { (!isTaskDialogOpen)
                 ?

@@ -5,7 +5,7 @@ import Alert from '@mui/material/Alert';
 // Relative Imports
 import { Context } from '../GlobalContext/TaskContextMain';
 import TaskAwayAPI from '../api/api';
-import TaskFormDialog from '../dialog/TaskFormDialog';
+import TaskFormDialog from '../utils/dialogs/TaskFormDialog';
 
 // Style Imports
 import '../../App.css';
