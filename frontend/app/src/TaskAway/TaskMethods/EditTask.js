@@ -1,54 +1,54 @@
 // Module Imports
 import React, { useContext } from 'react';
-import Alert from '@mui/material/Alert';
 
-// Relative Imports
-import { Context } from '../GlobalContext/TaskContextMain';
+// Relative imports
+import {Context} from '../GlobalContext/TaskContextMain';
 import TaskAwayAPI from '../api/api';
 import TaskFormDialog from '../dialog/TaskFormDialog';
 
-// Style Imports
-import '../../App.css';
 
-
-export default function AddTasks({ isDialogOpen, handleCloseDialog }) {
+export default function EditTasks({ task, isDialogOpen, handleCloseDialog }) {
 	const [state, dispatch] = useContext(Context);
 
     const handleIsTaskComplete = () => {
 		dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: !state.isTaskComplete })
 	};
 
-	const handleAddTask = () => {
-		TaskAwayAPI.createTask(state.title, state.desc, state.isTaskComplete);
+    const handleUpdateTask = () => {
+        TaskAwayAPI.updateTask(task.task._id, state.title, state.desc, state.isTaskComplete);
 
         dispatch({ type: 'SET_TITLE', payload: '', });
         dispatch({ type: 'SET_DESCRIPTION', payload: '', });
         dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: false, });
+        
+        handleCloseDialog();
+    };
 
-		handleCloseDialog();
+    const handleDeleteTask = () => {
+        TaskAwayAPI.deleteTask(task.task._id);
 
-		return (
-			<Alert onClose={() => {}}>Task Created!</Alert>
-		);
-	};
+        handleCloseDialog();
+    };
     
     return (
-        <div className="AddTask">
+        <div className="EditTask">
             <TaskFormDialog
-                dialogTitle="Add Task"
+                dialogTitle="Edit Task"
 
-                taskTitleDefaultValue={state.title}
+                taskTitleDefaultValue={task.task.title}
                 handleTaskTitle={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
 
-                taskDescDefaultValue={state.desc}
+                taskDescDefaultValue={task.task.description}
                 handleTaskDesc={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
 
-                isTaskComplete={state.isTaskComplete}
+                isTaskComplete={task.task.completed ? !state.isTaskComplete : state.isTaskComplete}
                 handleIsTaskComplete={handleIsTaskComplete}
 
                 isOpen={isDialogOpen}
                 handleClose={handleCloseDialog}
-                handleSubmit={() => handleAddTask()}
+
+                handleSubmit={() => handleUpdateTask()}
+                handleDelete={() => handleDeleteTask()}
             />
         </div>
     );

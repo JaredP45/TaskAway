@@ -5,5 +5,6 @@ export const initialState = {
     isTaskComplete: false,
     isTaskLoading: true,
     isTaskEditable: false,
+    isTaskDialogOpen: false,
     error: null,
 };

@@ -3,27 +3,36 @@ import React, { useState } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 // Relative imports
-import EditTask from '../TaskMethods/EditTasks/EditTask';
+import EditTask from '../TaskMethods/EditTask';
+
 
 export default function TaskMenuOptions(props) {
-    const [isTaskEditable, setIsTaskEditable] = useState(false);
+    const [isTaskDialogOpen, setIsTaskDialogOpen] = useState(false);
     
-    const handleIsTaskEditable = () => {
-        setIsTaskEditable(!isTaskEditable);
-    }
+    const handleIsTaskDialogOpen = () => {
+        setIsTaskDialogOpen(!isTaskDialogOpen);
+    };
+
+    const handleCloseTaskDialog = () => {
+        setIsTaskDialogOpen(false);
+    };
     
     return (
         <div className="TaskMenuOptions">
             <div 
-                onClick={handleIsTaskEditable}
+                onClick={handleIsTaskDialogOpen}
             >
                 <MoreHorizIcon />
             </div>
-            { (!isTaskEditable)
+            { (!isTaskDialogOpen)
                 ?
                     null
                 :
-                    <EditTask task={props} />
+                    <EditTask
+                        task={props}
+                        isDialogOpen={isTaskDialogOpen}
+                        handleCloseDialog={() => handleCloseTaskDialog()}
+                    />
                 // End-of-Ternary
             }
         </div>

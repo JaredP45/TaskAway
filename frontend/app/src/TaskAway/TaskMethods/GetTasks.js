@@ -2,7 +2,7 @@
 import { useEffect, useContext } from 'react';
 
 // Relative Imports
-import { Context } from '../TaskContextMain';
+import { Context } from '../GlobalContext/TaskContextMain';
 import TaskAwayAPI from '../api/api';
 
 // Style Imports

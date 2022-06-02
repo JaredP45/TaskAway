@@ -9,7 +9,7 @@ import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import TaskItem from '../TaskItem/TaskItem';
 import AddTask from '../TaskMethods/AddTask';
 import GetTasks from '../TaskMethods/GetTasks';
-import { Context } from '../TaskContextMain';
+import { Context } from '../GlobalContext/TaskContextMain';
 
 // Style Imports
 import '../../App.css';
@@ -17,12 +17,21 @@ import '../../App.css';
 
 const TodoListView = () => {
 	const [state, ] = useContext(Context);
-    const [timeline, setTimeline] = useState();
-    const [message, setMessage] = useState({
-        open: false,
-        vertical: 'top',
-        horizontal: 'center',
-    });
+    const [isTaskDialogOpen, setIsTaskDialogOpen] = useState(false);
+        const [timeline, setTimeline] = useState();
+        const [message, setMessage] = useState({
+            open: false,
+            vertical: 'top',
+            horizontal: 'center',
+        });
+    
+    const handleIsTaskDialogOpen = () => {
+        setIsTaskDialogOpen(!isTaskDialogOpen);
+    };
+
+    const handleCloseTaskDialog = () => {
+        setIsTaskDialogOpen(false);
+    };
 
     const handleMessageClick = () => {
         setMessage({ open: true });
@@ -67,12 +76,23 @@ const TodoListView = () => {
                     <Grid item>
                         <div style={{ display: 'inline-flex', alignItems: 'center' }}>
                             <h1 style={{ padding: '5px'}}>TaskAway</h1>
-                            <AddBoxOutlinedIcon />
+                            <div onClick={handleIsTaskDialogOpen}>
+                                <AddBoxOutlinedIcon />
+                            </div>
+                            { (!isTaskDialogOpen)
+                                ?
+                                    null
+                                :
+                                    <AddTask
+                                        isDialogOpen={isTaskDialogOpen}
+                                        handleCloseDialog={() => handleCloseTaskDialog()}
+                                    />
+                                // End-of-Ternary
+                            }
                         </div>
                         <Timeline>{timeline}</Timeline>
                     </Grid>
                 </Grid>
-                <AddTask />
             </Box>
         </>
     );

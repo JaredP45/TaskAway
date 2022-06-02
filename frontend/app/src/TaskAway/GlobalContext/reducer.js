@@ -30,6 +30,11 @@ const Reducer = (state, action) => {
                 ...state,
                 isTaskEditable: action.payload
             };
+        case 'SET_IS_TASK_DIALOG_OPEN':
+            return {
+                ...state,
+                isTaskDialogOpen: action.payload
+            };
         case 'GET_ERROR':
             return {
                 ...state,
