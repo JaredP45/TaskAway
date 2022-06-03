@@ -73,12 +73,16 @@ const TodoListView = () => {
     return (
         <>
             <Box sx={{ marginTop: 10 }}>
-                <Grid container>
+                <Grid 
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                >
                     <Grid item>
                         <div style={{ display: 'inline-flex', alignItems: 'center' }}>
                             <h1 style={{ padding: '5px'}}>TaskAway</h1>
                             <div onClick={handleIsTaskDialogOpen}>
-
                                 <TaskTooltip
                                     component={<AddBoxOutlinedIcon />}
                                     label="Add New Task"
@@ -95,6 +99,8 @@ const TodoListView = () => {
                                 // End-of-Ternary
                             }
                         </div>
+                    </Grid>
+                    <Grid item xs={4}>
                         <Timeline>{timeline}</Timeline>
                     </Grid>
                 </Grid>

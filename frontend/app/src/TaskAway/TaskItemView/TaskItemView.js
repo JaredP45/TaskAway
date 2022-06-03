@@ -49,7 +49,12 @@ export default function TaskItemView({ isComplete, task, index }) {
                     </TimelineDot>
                     <TimelineConnector />
                 </TimelineSeparator>
-                <TimelineContent style={handleIsCompleteLineThrough()}>{task.title} <small>{task.description}</small></TimelineContent>
+                <TimelineContent style={handleIsCompleteLineThrough()}>
+                    <div>
+                        {task.title}
+                    </div>
+                    <small>{task.description}</small>
+                </TimelineContent>
                 <TaskMenuOptions task={task} key={index} />
             </TimelineItem>
         </div>
