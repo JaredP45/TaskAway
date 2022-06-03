@@ -1,6 +1,6 @@
 import React, {createContext, useReducer} from "react";
-import Reducer from './GlobalContext/reducer';
-import { initialState } from './GlobalContext/initialState';
+import Reducer from './reducer';
+import { initialState } from './initialState';
 
 const TodoMain = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, initialState);

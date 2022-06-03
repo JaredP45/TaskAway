@@ -2,10 +2,12 @@
 import React, { useContext } from 'react';
 
 // Relative imports
-import {Context} from '../TaskContextMain';
+import {Context} from '../GlobalContext/TaskContextMain';
 import TaskAwayAPI from '../api/api';
+import TaskFormDialog from '../utils/dialogs/TaskFormDialog';
 
-export default function EditTasks(props) {
+
+export default function EditTasks({ task, isDialogOpen, handleCloseDialog }) {
 	const [state, dispatch] = useContext(Context);
 
     const handleIsTaskComplete = () => {
@@ -13,41 +15,41 @@ export default function EditTasks(props) {
 	};
 
     const handleUpdateTask = () => {
-        TaskAwayAPI.updateTask(props.task.task._id, state.title, state.desc, state.isTaskComplete);
+        TaskAwayAPI.updateTask(task.task._id, state.title, state.desc, state.isTaskComplete);
 
         dispatch({ type: 'SET_TITLE', payload: '', });
         dispatch({ type: 'SET_DESCRIPTION', payload: '', });
         dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: false, });
+        
+        handleCloseDialog();
+    };
+
+    const handleDeleteTask = () => {
+        TaskAwayAPI.deleteTask(task.task._id);
+
+        handleCloseDialog();
     };
     
     return (
         <div className="EditTask">
-            <div>
-                <input 
-                    onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
-                    value={state.title}
-                    placeholder={props.task.task.title}
-                />
-                <input 
-                    onChange={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
-                    value={state.desc}
-                    placeholder={props.task.task.description}
-                />
-                <label>
-                    Completed
-                    <input 
-                        onClick={handleIsTaskComplete}
-                        value={props.task.task.completed}
-                        type={'checkbox'}
-                    />
-                </label>
-                <button 
-                    onClick={() => handleUpdateTask()}
-                    style={{ color: 'blue'}}
-                >
-                    Update
-                </button>
-            </div>
+            <TaskFormDialog
+                dialogTitle="Edit Task"
+
+                taskTitleDefaultValue={task.task.title}
+                handleTaskTitle={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
+
+                taskDescDefaultValue={task.task.description}
+                handleTaskDesc={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
+
+                isTaskComplete={task.task.completed ? !state.isTaskComplete : state.isTaskComplete}
+                handleIsTaskComplete={handleIsTaskComplete}
+
+                isOpen={isDialogOpen}
+                handleClose={handleCloseDialog}
+
+                handleSubmit={() => handleUpdateTask()}
+                handleDelete={() => handleDeleteTask()}
+            />
         </div>
     );
 }

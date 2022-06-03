@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Relative Imports
-import TaskContextMain from './TaskAway/TaskContextMain';
+import TaskContextMain from './TaskAway/GlobalContext/TaskContextMain';
 import TaskListView from './TaskAway/TaskListView/TaskListView';
 
 

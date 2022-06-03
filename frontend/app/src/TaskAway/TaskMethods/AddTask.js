@@ -1,54 +1,55 @@
 // Module Imports
 import React, { useContext } from 'react';
+import Alert from '@mui/material/Alert';
 
 // Relative Imports
-import { Context } from '../TaskContextMain';
+import { Context } from '../GlobalContext/TaskContextMain';
 import TaskAwayAPI from '../api/api';
+import TaskFormDialog from '../utils/dialogs/TaskFormDialog';
 
 // Style Imports
 import '../../App.css';
 
-const TodoAdd = () => {
+
+export default function AddTasks({ isDialogOpen, handleCloseDialog }) {
 	const [state, dispatch] = useContext(Context);
 
-	const handleAddTodo = () => {
+    const handleIsTaskComplete = () => {
+		dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: !state.isTaskComplete })
+	};
+
+	const handleAddTask = () => {
 		TaskAwayAPI.createTask(state.title, state.desc, state.isTaskComplete);
 
         dispatch({ type: 'SET_TITLE', payload: '', });
         dispatch({ type: 'SET_DESCRIPTION', payload: '', });
         dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: false, });
-	};
 
-	const handleIsTaskComplete = () => {
-		dispatch({ type: 'SET_IS_TASK_COMPLETE', payload: !state.isTaskComplete })
-	};
+		handleCloseDialog();
 
-	return (
-		<div className="AddTask">
-			<p>Add Todo</p>
-			<input 
-				onChange={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
-				value={state.title}
-                placeholder='Title'
-			/>
-			<input 
-				onChange={(event) => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
-                value={state.desc}
-				placeholder='Description'
-			/>
-			<label>
-				Completed
-				<input
-					onClick={handleIsTaskComplete}
-					value={state.isTaskComplete}
-					type={'checkbox'}
-				/>
-			</label>
-			<button onClick={handleAddTodo}>
-				Add
-			</button>
-		</div>
-	);
+		return (
+			<Alert onClose={() => {}}>Task Created!</Alert>
+		);
+	};
+    
+    return (
+        <div className="AddTask">
+            <TaskFormDialog
+                dialogTitle="Add Task"
+
+                taskTitleDefaultValue={state.title}
+                handleTaskTitle={(event) => dispatch({ type: 'SET_TITLE', payload: event.target.value })}
+
+                taskDescDefaultValue={state.desc}
+                handleTaskDesc={event => dispatch({ type: 'SET_DESCRIPTION', payload: event.target.value })}
+
+                isTaskComplete={state.isTaskComplete}
+                handleIsTaskComplete={handleIsTaskComplete}
+
+                isOpen={isDialogOpen}
+                handleClose={handleCloseDialog}
+                handleSubmit={() => handleAddTask()}
+            />
+        </div>
+    );
 }
-
-export default TodoAdd;
