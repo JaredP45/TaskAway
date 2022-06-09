@@ -5,7 +5,7 @@ from fastapi.responses import Response, JSONResponse
 from fastapi.encoders import jsonable_encoder
 
 # Relative Imports
-from apps.taskaway.models.task import TaskModel, UpdateTaskModel
+from apps.taskapp.models.task import TaskModel, UpdateTaskModel
 
 
 router = APIRouter(prefix="/tasks", tags=["Tasks App"], responses={404: {"description": "Not found"}})

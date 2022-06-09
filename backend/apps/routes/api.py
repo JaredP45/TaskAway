@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from apps.taskaway.endpoints import task
+from apps.taskapp.endpoints import task
 from apps.userapp.endpoints import user
 
 router = APIRouter()
