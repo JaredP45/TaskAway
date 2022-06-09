@@ -13,7 +13,7 @@ class TaskModel(BaseModel):
         created_on - day task was created on
         completed - if task was completed
     '''
-    
+
     uid: str = Field(default_factory=uuid.uuid4, alias="_id")
     title: str = Field(...)
     description: str = Field(...)
