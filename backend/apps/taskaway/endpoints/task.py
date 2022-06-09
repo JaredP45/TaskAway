@@ -8,7 +8,7 @@ from fastapi.encoders import jsonable_encoder
 from apps.taskaway.models.task import TaskModel, UpdateTaskModel
 
 
-router = APIRouter(prefix="/tasks", tags=["Task"], responses={404: {"description": "Not found"}})
+router = APIRouter(prefix="/tasks", tags=["Tasks App"], responses={404: {"description": "Not found"}})
 
 
 # Create Router
