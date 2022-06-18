@@ -17,11 +17,18 @@ class ServerSettings(BaseSettings):
 
 
 class DatabaseSettings(BaseSettings):
+    REALM_APP_ID: str = os.environ.get("REALM_APP_ID")
     DB_URL: str = os.environ.get("DB_URL")
     DB_NAME: str = os.environ.get("DB_NAME")
+
+
+class AuthSettings(BaseSettings):
+    JWT_SECRET_KEY: str = os.environ.get("JWT_SECRET_KEY")
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    SECURE_COOKIE: bool = False
     
 
-class Settings(CommonSettings, ServerSettings, DatabaseSettings):
+class Settings(CommonSettings, ServerSettings, DatabaseSettings, AuthSettings):
     """
         Base class that inherits objects from CommonSettings,
             ServerSettings, and DatabaseSettings
