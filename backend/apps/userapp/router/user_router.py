@@ -7,12 +7,12 @@ from fastapi.encoders import jsonable_encoder
 # Relative Imports
 from apps.userapp.models.user import UserDB
 from apps.userapp.auth.auth import jwt_authentication
-from apps.config import settings
+from config import settings
 
 
 
 def get_users_router(app):
-    users_routers = APIRouter(prefix="/users", tags=["Users App"], responses={404: {"description": "Not found"}})
+    users_router = APIRouter(prefix="/users", tags=["Users App"], responses={404: {"description": "Not found"}})
 
     def on_after_register(user: UserDB, request: Request):
         print(f"User {user.id} has registered.")

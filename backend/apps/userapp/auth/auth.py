@@ -3,7 +3,7 @@ from fastapi_users.authentication import CookieAuthentication
 from fastapi_users.utils import JWT_ALGORITHM, generate_jwt
 
 # Relative Imports
-from apps.config import settings
+from config import settings
 
 
 class MongoDBRealmJWTAuthentication(CookieAuthentication):

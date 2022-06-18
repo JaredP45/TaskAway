@@ -1,22 +1,39 @@
 # Module Imports
 import uvicorn
 from fastapi import FastAPI
+from fastapi_users import FastAPIUsers
+from fastapi_users.db import MongoDBUserDatabase
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 
 # Relative Imports
-from apps.routes.api import router
 from config import settings
+from apps.userapp.auth.auth import jwt_authentication
+from apps.taskapp.router.task_router import get_tasks_router
+from apps.userapp.router.user_router import get_users_router
+from apps.userapp.models.user import User, UserCreate, UserUpdate, UserDB
+
 
 
 app = FastAPI()
-app.include_router(router)
 
 @app.on_event("startup")
-async def startup_db_client():
-    app.mongodb_client = AsyncIOMotorClient(str(settings.DB_URL))
-    app.mongodb = app.mongodb_client[str(settings.DB_NAME)]
+async def configure_db_and_routes():
+    app.mongodb_client = AsyncIOMotorClient(settings.DB_URL, uuidRepresentation="standard")
+    app.db = app.mongodb_client.get_default_database()
+    user_db = MongoDBUserDatabase(UserDB, app.db["users"])
 
+    app.fastapi_users = FastAPIUsers(
+        user_db,
+        [jwt_authentication],
+        User,
+        UserCreate,
+        UserUpdate,
+        UserDB,
+    )
+
+    app.include_router(get_tasks_router(app))
+    app.include_router(get_users_router(app))
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
